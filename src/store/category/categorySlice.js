@@ -16,22 +16,23 @@ export const categoryRequestAsync = createAsyncThunk('category/fetch',
 const categorySlice = createSlice({
     name: 'category',
     initialState,
-    reducers:{
+    reducers: {
         changeCategory(state, action) {
             state.activeCategory = action.payload.indexCategory
         }
     },
-    extraReducers: {
-        [categoryRequestAsync.pending]: (state) => {
-            state.eror = '';
-        },
-        [categoryRequestAsync.fulfilled]: (state, action) => {
-            state.eror = '';
-            state.category = action.payload;
-        },
-        [categoryRequestAsync.rejected]: (state, action) => {
-            state.eror = action.payload.error;
-        }
+    extraReducers: builder => {
+        builder
+            .addCase(categoryRequestAsync.pending, (state) => {
+                state.eror = '';
+            })
+            .addCase(categoryRequestAsync.fulfilled, (state, action) => {
+                state.eror = '';
+                state.category = action.payload;
+            })
+            .addCase(categoryRequestAsync.rejected, (state, action) => {
+                state.eror = action.payload.error
+            })
     }
 });
 export const { changeCategory } = categorySlice.actions;

@@ -85,13 +85,20 @@
 .order__submit {
     width: 100%;
     padding: 9px;
-    background: #FF7020;
+    background-color: #FF7020;
     border-radius: 8px;
     font-weight: 400;
     font-size: 12px;
     line-height: 100%;
     color: #FFFFFF;
     margin-bottom: 8px;
+}
+
+.order__submit:disabled {
+    background-color: #bfbfc0;
+    opacity: 0.7;
+    color: #000;
+    cursor: no-drop;
 }
 
 .order__apeal {

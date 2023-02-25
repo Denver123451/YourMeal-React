@@ -23,7 +23,7 @@ export const localStorageMiddleware = store => next => action => {
 
 export const orderRequestAsync = createAsyncThunk(
     'order/fetch',
-    (_, {getState}) => {
+     (_, {getState}) => {
         const listId = getState().order.orderList.map(item => item.id);
 
         return fetch(`${API_URI}${POSTFIX}?list=${listId}`)
@@ -60,7 +60,10 @@ const orderSlice = createSlice({
                 state.orderList = state.orderList.filter(item => item.id !== action.payload.id)
             }
     },
-
+        clearOrder:(state) => {
+            state.orderList = [];
+            state.orderGoods = [];
+        }
 
     },
     extraReducers: builder => {
@@ -90,5 +93,5 @@ const orderSlice = createSlice({
     }
 });
 
-export const { addProduct, removeProduct } = orderSlice.actions;
+export const { addProduct, removeProduct, clearOrder } = orderSlice.actions;
 export  default orderSlice.reducer;
